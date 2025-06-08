@@ -1,128 +1,71 @@
 <?php
-if (isset($_POST["submit"])) {
-    if ($_POST["username"] == "admin" && $_POST["password"] == "admin") {
-        header("Location: admin.php");
-        exit;
+include 'components/connection.php';
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    $user_id = '';
+}
+
+// register now
+if (isset($_POST['submit'])) {
+
+    $emai = $_POST['email'];
+    $emai = filter_var($email, FILTER_SANITIZE_STRING);
+    $pass = $_POST['pass'];
+    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+
+    $select_user = $conn->prepare("SELECT * FROM 'users' WHERE email = ? AND password * ?");
+    $select_user->execute([$email, $pass]);
+    $row = $select_user->fetch(PDO::FETCH_ASSOC);
+
+    if ($select_user->rowCount() > 0) {
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['user_name'] = $row['name'];
+        $_SESSION['user_email'] = $row['email'];
+        header('location: home.php');
     } else {
-        $error = true;
+        $messsage[] = 'incorrect username or password';
     }
 }
 ?>
-
+<style type="text/css">
+    <?php include 'style.css'; ?>
+</style>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(to right, rgb(241, 188, 206), rgb(216, 140, 165));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .videobg video {
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            position: fixed;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        .login-container {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgb(255, 255, 255);
-            width: 350px;
-            text-align: center;
-            position: absolute;
-            color: white;
-            z-index: 1;
-        }
-
-
-        h1 {
-            margin-bottom: 20px;
-            color: rgb(255, 255, 255);
-        }
-
-        form {
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            color: rgb(255, 255, 255);
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: rgb(0, 0, 0);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: rgb(182, 169, 173);
-        }
-
-        .error {
-            color: red;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SneakPair - logiin now</title>
 </head>
 
 <body>
-    <div class="videobg">
-        <video autoplay muted loop>
-            <source src="Assets/video/bg.mp4">
-        </video>
-    </div>
-    <div class="login-container">
-        <h1>Login Admin</h1>
+    <div class="main-container">
+        <section class="form-container">
+            <div class="title">
+                <img src="" alt="">
+                <h1>login now</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, quidem. Numquam minus quo asperiores facere molestias labore, quisquam voluptas dolorem repudiandae eum temporibus, officiis suscipit, unde fuga corporis. Ducimus, hic.</p>
+            </div>
+            <form action="" method="post">
+                <div class="input-field">
+                    <p>your email <sup>*</sup></p>
+                    <input type="text" name="email" require placeholder="enter your email" maxlength="50"
+                        oninput="this.value = rhis.value.replace(/\s/g, '')">
+                </div>
+                <div class="input-field">
+                    <p>comfirm password <sup>*</sup></p>
+                    <input type="password" name="name" require placeholder="enter your passsword" maxlength="50"
+                        oninput="this.value = rhis.value.replace(/\s/g, '')">
+                </div>
 
-        <?php if (isset($error)) : ?>
-            <p class="error">username / password salah!</p>
-        <?php endif; ?>
-
-        <form action="" method="post">
-            <label for="username">Username :</label>
-            <input type="text" name="username" id="username">
-
-            <label for="password">Password :</label>
-            <input type="password" name="password" id="password">
-
-            <button type="submit" name="submit">Login</button>
-        </form>
+                <input type="submit" name="submit" value="register now" class="btn">
+                <p>do not have an account? <a href="register.php">register now</a></p>
+            </form>
+        </section>
     </div>
 </body>
 
