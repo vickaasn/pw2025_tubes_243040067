@@ -22,6 +22,7 @@ html {
 
 body {
   background-image: url(Assets/img/bg.jpg);
+  font-family: "Noto Sans", sans-serif;
   width: 100%;
 }
 
@@ -49,6 +50,7 @@ a {
 
 .title p {
   text-transform: capitalize;
+  font-family: "Yeseva One", serif;
 }
 
 .title .logo {
@@ -144,7 +146,7 @@ button {
 }
 
 .banner {
-  background-image: url(Assets/img/ft1.png);
+  background-image: url(Assets/img/slide3.jpg);
   background-size: cover;
   background-position: center;
   background-color: var(--green);
@@ -153,7 +155,7 @@ button {
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; /* Ini diperlukan untuk menengahkan konten seperti "ABOUT US" */
 }
 
 .banner h1 {
@@ -284,18 +286,18 @@ button {
 
 .header .flex .icons .cart-btn sup {
   position: absolute;
-  top: -0.8rem; /* Sesuaikan posisi angka */
-  right: -1rem; /* Sesuaikan posisi angka */
+  top: -0.8rem;
+  right: -1rem;
   background-color: var(--green);
   color: var(--white);
   font-size: 1rem;
   border-radius: 50%;
-  padding: 0.3rem 0.7rem; /* Padding yang lebih baik untuk badge angka */
+  padding: 0.3rem 0.7rem;
   line-height: 1;
-  display: flex; /* Untuk centering teks di dalam sup */
+  display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 1.5rem; /* Ukuran minimum untuk badge */
+  min-width: 1.5rem;
   min-height: 1.5rem;
 }
 
@@ -355,7 +357,7 @@ button {
 }
 
 .user-box .btn:hover {
-  background: #006400; /* Darker green on hover */
+  background: rgb(255, 255, 255); /* Darker green on hover */
 }
 
 .user-box .btn:last-child {
@@ -478,25 +480,27 @@ button {
 }
 
 .slider {
+  font-family: "Noto Sans", sans-serif;
   max-height: 80vh;
   height: 100vh;
   width: 100%;
   display: flex;
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  position: relative;
+  /* position: relative; */
 }
 
 .slider__slider {
   min-width: 100%;
-  height: 100%;
+  height: 100%; /*100%*/
+  width: 100%; /*tadinya gaada*/
   background-position: center center;
   background-size: cover;
-  position: relative; /* Keep this for overlay and slide-detail z-index */
-  display: flex; /* Use flexbox for centering content */
-  align-items: center; /* Vertically center content */
-  justify-content: center; /* Horizontally center content */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   scroll-snap-align: start;
 }
 
@@ -512,33 +516,34 @@ button {
 
 .slider__slider .slide-detail {
   /* REMOVED absolute positioning here to allow flexbox to center it */
-  position: relative; /* Keep relative to define z-index correctly */
+  position: absolute; /* tadinya relative */
   text-align: center;
-  z-index: 2;
+  top: 30%; /*gaada
+  left: 20%; /*gaada
+  /* z-index: 2;
   max-width: 80%; /* Adjusted from '8' to '80%' for a valid width */
-  padding: 2rem;
+  /* padding: 2rem; */
 }
 
 .slider__slider .slide-detail h1 {
-  font-size: 5rem; /* Increased font size for prominence */
+  font-size: 30px; /* Increased font size for prominence */
   color: #fff;
   text-transform: uppercase;
   position: relative;
-  margin-bottom: 5rem;
-  letter-spacing: 0.2rem;
-  line-height: 1.2;
+  text-align: center;
+  font-family: "Yeseva One", serif;
 }
 
 .slider__slider .slide-detail h1::before {
   position: absolute;
   content: "";
   background: #e2e2e2;
-  width: 100%;
+  width: 380px; /*100*/
   max-width: 380px;
   height: 1px;
-  bottom: -2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: -40%; /*tadinya -2.5rem */
+  left: 20%; /*tadinya 50*/
+  /* transform: translateX(-50%); */
 }
 
 .slider__slider .slide-detail h1::after {
@@ -547,44 +552,32 @@ button {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  bottom: -3.5rem;
+  bottom: -50%; /*tadinya -3.5rem*/
   left: 50%;
-  transform: translateX(-50%);
-  background: #f7b90f;
+  /* transform: translateX(-50%); */
+  background: #fff;
 }
 
 .slider__slider .slide-detail p {
-  font-size: 1.8rem;
+  font-size: 1rem;
   color: #fff;
   margin-top: 2rem;
-  margin-bottom: 3rem;
-  max-width: 600px;
+  margin-bottom: 2rem; /*3*/
+  /* max-width: 600px;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
 }
 
-/* Background images for slides */
-/* CORRECTED SELECTOR: applied directly to the slide classes */
-.slider__slider.slidel {
-  /* This is the correct way to target the first slide with its specific background */
-  background-image: url(Assets/img/ft1.png);
+.slidel {
+  background-image: url(Assets/img/slide6.jpg);
 }
 
-/* For slide2, slide3, slide4, slide5 - correct selector is just the class name */
 .slide2 {
-  background-image: url(Assets/img/foster2.jpg);
+  background-image: url(Assets/img/slide1.jpg);
 }
 
 .slide3 {
-  background-image: url(Assets/img/foster1.jpg); /* Assuming you want foster1.jpg again */
-}
-
-.slide4 {
-  background-image: url(Assets/img/foster2.jpg); /* Assuming you want foster2.jpg again */
-}
-
-.slide5 {
-  background-image: url(Assets/img/foster2.jpg); /* Assuming you want foster2.jpg again */
+  background-image: url(Assets/img/slide3.jpg);
 }
 
 .left-arrow,
@@ -635,6 +628,8 @@ button {
   border-left: 2px solid #e2e2e2;
   border-bottom: 2px solid #e2e2e2;
 }
+
+/* thumb section */
 
 .thumb {
   max-width: 1200px;
@@ -710,9 +705,13 @@ button {
 }
 
 .shop {
-  background-image: url();
+  background-image: url(Assets/img/bg.jpg);
   margin: 2rem 0;
   padding: 2rem 1rem;
+}
+
+.shop .title h1 {
+  font-family: "Yeseva One", serif;
 }
 
 .shop .row {
@@ -729,11 +728,12 @@ button {
 }
 
 .shop .box-container {
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
 
 .shop .box-container .box {
   margin: 1rem;
+  margin-top: 3rem;
   box-shadow: var(--box-shadow);
   position: relative;
   background-color: #fff;
@@ -785,7 +785,7 @@ button {
 }
 
 .services img {
-  width: 30%;
+  width: 60%;
 }
 
 .brand {
@@ -808,11 +808,11 @@ button {
 }
 
 .about-category .box img {
-  width: 60%;
+  width: 100%;
 }
 
-.about-category .box:nth-child(3) img {
-  width: 75%;
+.about-category .box:nth-child(4) img {
+  width: 100%;
 }
 
 .about-category .box .detail {
@@ -823,12 +823,13 @@ button {
 
 .about-category .box .detail h1 {
   margin-bottom: 1.5rem;
+  color: #fff;
 }
 
 .about-category .box .detail span {
   text-transform: uppercase;
   font-size: 20px;
-  color: #555;
+  color: #ffffff;
 }
 
 .about-category .box .detail .btn {
@@ -857,9 +858,18 @@ button {
   margin: 1rem 0;
 }
 
+.about .row .img-box video {
+  top: 0;
+  left: 0;
+  width: 80vw;
+  height: 80vh;
+  margin-left: -20rem;
+  margin-right: -20rem;
+}
+
 .testimonial-container {
   padding: 6% 0;
-  background-image: url();
+  background-color: #fff;
 }
 
 .testimonial-container .container {
@@ -912,6 +922,7 @@ button {
 .testimonial-container .container .testimonial-item img {
   padding: 1rem 0;
   border-radius: 50%;
+  height: 200px; /* Tinggi gambar 200 piksel */
 }
 
 .testimonial-container .container .left-arrow,
@@ -963,7 +974,7 @@ button {
 .form-container input,
 textarea {
   background-color: transparent;
-  width: 85%;
+  width: 100%;
 }
 
 textarea {
@@ -998,17 +1009,17 @@ textarea {
 }
 
 .form-container form input {
-  width: 85%;
+  width: 100%;
 }
 
 .form-container form button {
-  width: 85%;
+  width: 100%;
   border-radius: 10px;
   outline: none;
 }
 
 .address {
-  background-image: url();
+  background-image: url(Assets/img/bg.jpg);
   padding: 4rem 0;
   min-height: 50vh;
 }
@@ -1047,7 +1058,6 @@ textarea {
 }
 
 /* ---------footer section--------- */
-/* ---------footer section--------- */
 .top-footer {
   width: 100%;
   background: var(--green);
@@ -1068,7 +1078,7 @@ textarea {
 }
 
 footer {
-  background-image: url("Assets/img/footer.jpeg"); /* Pastikan path gambar benar */
+  background-image: url("Assets/img/slide2.jpg"); /* Pastikan path gambar benar */
   width: 100%;
   min-height: 73vh; /* Tinggi minimum footer */
   background-repeat: no-repeat;

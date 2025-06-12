@@ -21,7 +21,11 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Coffe - home page</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Yeseva+One&display=swap" rel="stylesheet">
+    <title>Green Coffe - contact page</title>
 </head>
 
 <body>
@@ -36,28 +40,28 @@ if (isset($_POST['logout'])) {
         <section class="services">
             <div class="box-container">
                 <div class="box">
-                    <img src="" alt="">
+                    <img src="Assets/img/box1.jpg" alt="">
                     <div class="detail">
                         <h3>great savings</h3>
                         <p>save big every order</p>
                     </div>
                 </div>
                 <div class="box">
-                    <img src="" alt="">
+                    <img src="Assets/img/bo2.jpg" alt="">
                     <div class="detail">
                         <h3>24*7 support</h3>
                         <p>one-on-one support</p>
                     </div>
                 </div>
                 <div class="box">
-                    <img src="" alt="">
+                    <img src="Assets/img/box3.jpg" alt="">
                     <div class="detail">
                         <h3>gift voucher</h3>
                         <p>voucher on every festifals</p>
                     </div>
                 </div>
                 <div class="box">
-                    <img src="" alt="">
+                    <img src="Assets/img/box4.jpg" alt="">
                     <div class="detail">
                         <h3>worldwide delivery</h3>
                         <p>dropsgip woldwide</p>
@@ -68,13 +72,12 @@ if (isset($_POST['logout'])) {
         <div class="form-container">
             <form method="post">
                 <div class="title">
-                    <img src="" alt="">
+                    <img src="Assets/img/logo2.png" alt="">
                     <h1>leave a messege</h1>
                 </div>
                 <div class="input-field">
-                    <p>your name <sup>*</sup>
-                        <input type="text" name="name">
-                    </p>
+                    <p>your name <sup>*</sup></p>
+                    <input type="text" name="name">
                 </div>
                 <div class="input-field">
                     <p>your email <sup>*</sup></p>
@@ -93,7 +96,7 @@ if (isset($_POST['logout'])) {
         </div>
         <div class="address">
             <div class="title">
-                <img src="" alt="">
+                <img src="Ass" alt="">
                 <h1>contact detail</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
@@ -102,7 +105,7 @@ if (isset($_POST['logout'])) {
                     <i class="bx bxs-map-pin"></i>
                     <div>
                         <h4>address</h4>
-                        <p>1092 merigold lane, coral way</p>
+                        <p>1092 merigold lane,</p>
                     </div>
                 </div>
                 <div class="box">

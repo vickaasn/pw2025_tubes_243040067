@@ -24,6 +24,10 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Yeseva+One&display=swap" rel="stylesheet">
     <title>Green Coffe - order page</title>
 </head>
 
@@ -44,7 +48,7 @@ if (isset($_POST['logout'])) {
             </div>
             <div class="box-container">
                 <?php
-                $select_orders = $conn->prepare("SELECT * FROM 'orders' WHERE user_id = ? ORDER BY date DESC");
+                $select_orders = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY data DESC");
                 $select_orders->execute([$user_id]);
                 if ($select_orders->rowCount() > 0) {
                     while ($fetch_order = $select_orders->fetch(PDO::FETCH_ASSOC)) {

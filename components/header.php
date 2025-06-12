@@ -38,7 +38,7 @@ if ($user_id !== null) { // Hanya jalankan query jika user_id ada
         <!-- Navigasi Utama -->
         <nav class="navbar">
             <a href="home.php">home</a>
-            <a href="C:\laragon\www\pw2025_tubes_243040067\view_product.php">products</a>
+            <a href="./view_product.php">products</a>
             <a href="order.php">order</a>
             <a href="about.php">about us</a>
             <a href="contact.php">contact us</a>
@@ -47,10 +47,20 @@ if ($user_id !== null) { // Hanya jalankan query jika user_id ada
         <!-- Ikon (User, Wishlist, Cart, Menu) -->
         <div class="icons">
             <i class="bx bxs-user" id="user-btn"></i>
+            <?php
+            $count_wishlist_items = $conn->prepare("SELECT * FROM wishlist WHERE user_id = ?");
+            $count_wishlist_items->execute([$user_id]);
+            $total_wishlist_items = $count_wishlist_items->rowCount();
+            ?>
             <a href="wishlist.php" class="cart-btn">
                 <i class="bx bx-heart"></i>
                 <sup><?= $total_wishlist_items ?></sup>
             </a>
+            <?php
+            $count_cart_items = $conn->prepare("SELECT * FROM cart WHERE user_id = ?");
+            $count_cart_items->execute([$user_id]);
+            $total_cart_item = $count_cart_items->rowCount();
+            ?>
             <a href="cart.php" class="cart-btn">
                 <i class="bx bx-cart-download"></i>
                 <sup><?= $total_cart_items ?></sup>

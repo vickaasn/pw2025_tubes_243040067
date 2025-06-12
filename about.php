@@ -21,6 +21,10 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Yeseva+One&display=swap" rel="stylesheet">
     <title>Green Coffe - about us page</title>
 </head>
 
@@ -35,7 +39,7 @@ if (isset($_POST['logout'])) {
         </div>
         <div class="about-category">
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/about1.jpg">
                 <div class="detail">
                     <span>coffee</span>
                     <h1>lemon green</h1>
@@ -43,7 +47,7 @@ if (isset($_POST['logout'])) {
                 </div>
             </div>
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/about2.jpg">
                 <div class="detail">
                     <span>coffee</span>
                     <h1>lemon tea</h1>
@@ -51,7 +55,7 @@ if (isset($_POST['logout'])) {
                 </div>
             </div>
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/about3.jpg">
                 <div class="detail">
                     <span>coffee</span>
                     <h1>lemon tea</h1>
@@ -59,7 +63,7 @@ if (isset($_POST['logout'])) {
                 </div>
             </div>
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/about4.jpg">
                 <div class="detail">
                     <span>coffee</span>
                     <h1>lemon green</h1>
@@ -69,34 +73,34 @@ if (isset($_POST['logout'])) {
         </div>
         <section class="services">
             <div class="title">
-                <img src="" alt="">
+                <img src="Assets/img/logobrand.jpg" alt="">
                 <h1>why choose us</h1>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis a ullam libero blanditiis corporis at beatae tenetur facilis ea molestiae.</p>
             </div>
             <div class="box-container">
                 <div class="box">
-                    <img src="" alt="">
+                    <img src="Assets/img/box1.jpg" alt="">
                     <div class="detail">
                         <h3>great savings</h3>
                         <p>save big every order</p>
                     </div>
                 </div>
                 <div class="box">
-                    <img src="" alt="">
+                    <img src="Assets/img/bo2.jpg">
                     <div class="detail">
                         <h3>24*7 support</h3>
                         <p>one-on-one support</p>
                     </div>
                 </div>
                 <div class="box">
-                    <img src="" alt="">
+                    <img src="Assets/img/box3.jpg">
                     <div class="detail">
                         <h3>gift voucher</h3>
                         <p>voucher on every festifals</p>
                     </div>
                 </div>
                 <div class="box">
-                    <img src="" alt="">
+                    <img src="Assets/img/box4.jpg">
                     <div class="detail">
                         <h3>worldwide delivery</h3>
                         <p>dropsgip woldwide</p>
@@ -107,7 +111,9 @@ if (isset($_POST['logout'])) {
         <div class="about">
             <div class="row">
                 <div class="img-box">
-                    <img src="" alt="">
+                    <video autoplay muted loop>
+                        <source src="Assets/video/model2.mp4">
+                    </video>
                 </div>
                 <div class="detail">
                     <h1>visit oyr beautiful showroon</h1>
@@ -118,26 +124,32 @@ if (isset($_POST['logout'])) {
         </div>
         <div class="testimonial-container">
             <div class="title">
-                <img src="" alt="">
+                <img src="Assets/img/=" alt="">
                 <h1>what people say about us</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam delectus illo numquam quia corrupti, aperiam dolores doloremque eveniet architecto, doloribus eaque laudantium iure adipisci quaerat? Quae necessitatibus sequi minus nemo.</p>
             </div>
             <div class="container">
                 <div class="testimonial-item active">
-                    <img src="" alt="">
+                    <img src="Assets/img/testimoni.jpg" alt="">
                     <h1>sara samith</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi quisquam maiores, exercitationem, possimus est dolores molestias quam a veritatis, asperiores labore iste corporis excepturi eos quod doloribus. Dolor, magni consequatur!</p>
                 </div>
                 <div class="testimonial-item active">
-                    <img src="" alt="">
+                    <img src="Assets/img/testimoni2.jpg" alt="">
                     <h1>sara samith</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi quisquam maiores, exercitationem, possimus est dolores molestias quam a veritatis, asperiores labore iste corporis excepturi eos quod doloribus. Dolor, magni consequatur!</p>
                 </div>
                 <div class="testimonial-item">
-                    <img src="" alt="">
+                    <img src="Assets/img/" alt="">
                     <h1>sara samith</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi quisquam maiores, exercitationem, possimus est dolores molestias quam a veritatis, asperiores labore iste corporis excepturi eos quod doloribus. Dolor, magni consequatur!</p>
                 </div>
+                <div class="testimonial-item">
+                    <img src="Assets/img/" alt="">
+                    <h1>sara samith</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi quisquam maiores, exercitationem, possimus est dolores molestias quam a veritatis, asperiores labore iste corporis excepturi eos quod doloribus. Dolor, magni consequatur!</p>
+                </div>
+                
                 <div class="left-arrow" onclick="nextSlide()"><i class="bx bxs-left-arrow-alt"></i></div>
                 <div class="right-arrow" onclick="prevSlide()"><i class="bx bxs-right-arrow-alt"></i></div>
             </div>

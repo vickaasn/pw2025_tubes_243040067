@@ -1,23 +1,21 @@
 <?php
 if (isset($success_msg)) {
-    foreach ($success_msg as $success_msg) {
-        echo '<script>swal("' . $success_msg . '",", "succes");</script>';
+    foreach ($success_msg as $msg) {
+        echo '<script>swal("Berhasil", "' . $msg . '", "success");</script>';
     }
 }
 if (isset($warning_msg)) {
-    foreach ($warning_msg as $warning_msg) {
-        echo '<script>swal("' . $warning_msg . '",", "succes");</script>';
+    foreach ($warning_msg as $msg) {
+        echo '<script>swal("Peringatan", "' . $msg . '", "warning");</script>';
     }
 }
 if (isset($info_msg)) {
-    foreach ($info_msg as $info_msg) {
-        echo '<script>swal("' . $info_msg . '",", "succes");</script>';
+    foreach ($info_msg as $msg) {
+        echo '<script>swal("Info", "' . $msg . '", "info");</script>';
     }
 }
 if (isset($error_msg)) {
-    foreach ($error_msg as $error_msg) {
-        echo '<script>swal("' . $error_msg . '",", "succes");</script>';
+    foreach ($error_msg as $msg) {
+        echo '<script>swal("Error", "' . $msg . '", "error");</script>';
     }
 }
-
-// untuk menampilkan pesan notifikasi (alert) kepada pengguna di website

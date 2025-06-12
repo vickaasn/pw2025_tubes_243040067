@@ -24,17 +24,21 @@ if (isset($_POST['logout'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Coffe - home page</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Yeseva+One&display=swap" rel="stylesheet">
 </head>
 
 
 <body>
     <?php include 'components/header.php'; ?>
     <div class="main">
+
         <section class="home-section">
             <div class="slider">
                 <div class="slider__slider slidel">
                     <div class="overlay"></div>
-                    <div class="slide-detai1">
+                    <div class="slide-detail">
                         <h1>welcome to my shop</h1>
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate iure dicta excepturi molestiae odio quia eius saepe itaque dolore earum.</p>
                         <a href="view_products.php" class="btn">shop now</a>
@@ -46,9 +50,6 @@ if (isset($_POST['logout'])) {
                 <div class="slider__slider slide2">
                     <div class="overlay"></div>
                     <div class="slide-detail">
-                        <h1>welcome to my shop</h1>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate iure dicta excepturi molestiae odio quia eius saepe itaque dolore earum.</p>
-                        <a href="view_products.php" class="btn">shop now</a>
                     </div>
                     <div class="hero-dec-top"></div>
                     <div class="hero-dec-bottom"></div>
@@ -57,66 +58,42 @@ if (isset($_POST['logout'])) {
                 <div class="slider__slider slide3">
                     <div class="overlay"></div>
                     <div class="slide-detail">
-                        <h1>welcome to my shop</h1>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate iure dicta excepturi molestiae odio quia eius saepe itaque dolore earum.</p>
-                        <a href="view_products.php" class="btn">shop now</a>
+
                     </div>
                     <div class="hero-dec-top"></div>
                     <div class="hero-dec-bottom"></div>
                 </div>
                 <!-- slide end -->
-                <div class="slider__slider slide4">
-                    <div class="overlay"></div>
-                    <div class="slide-detail">
-                        <h1>welcome to my shop</h1>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate iure dicta excepturi molestiae odio quia eius saepe itaque dolore earum.</p>
-                        <a href="view_products.php" class="btn">shop now</a>
-                    </div>
-                    <div class="hero-dec-top"></div>
-                    <div class="hero-dec-bottom"></div>
-                </div>
-                <!-- slide end -->
-                <div class="slider__slider slide5">
-                    <div class="overlay"></div>
-                    <div class="slide-detail">
-                        <h1>welcome to my shop</h1>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate iure dicta excepturi molestiae odio quia eius saepe itaque dolore earum.</p>
-                        <a href="view_products.php" class="btn">shop now</a>
-                    </div>
-                    <div class="hero-dec-top"></div>
-                    <div class="hero-dec-bottom"></div>
-                </div>
             </div>
             <!-- slide end -->
-            <div class="left-arrow"><i class="bx bxc-left-arrow"></i></div>
-            <div class="right-arrow"><i class="bx bxc-right-arrow"></i></div>
+
         </section>
     </div>
     <!-- home slide end -->
     <section class="thumb">
         <div class="box-container">
             <div class="box">
-                <img src="" alt="">
-                <h3>green tea</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, odit.</p>
+                <img src="Assets/img/thumb1.jpg">
+                <h3>Shop Now</h3>
+                <p>Discover the latest sneaker collection with maximum style and comfort. Ready to check out!</p>
                 <i class="bx bx-chevron-right"></i>
             </div>
             <div class="box">
-                <img src="" alt="">
-                <h3>green tea</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, odit.</p>
+                <img src="Assets/img/thumb2.jpg">
+                <h3>Store Location</h3>
+                <p>Visit our physical store and explore a wide range of trendy sneakers in person.</p>
                 <i class="bx bx-chevron-right"></i>
             </div>
             <div class="box">
-                <img src="" alt="">
-                <h3>green tea</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, odit.</p>
+                <img src="Assets/img/thumb3.jpg">
+                <h3>New Arrivals</h3>
+                <p>Check out our latest releases with exclusive designs only at SNEAKYPAIR.</p>
                 <i class="bx bx-chevron-right"></i>
             </div>
             <div class="box">
-                <img src="" alt="">
-                <h3>green tea</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, odit.</p>
+                <img src="Assets/img/thumb4.jpg">
+                <h3>Featured Sneaker</h3>
+                <p>Top pick sneakers for everyday style and active life. Comfortable and fashionable!</p>
                 <i class="bx bx-chevron-right"></i>
             </div>
         </div>
@@ -128,49 +105,48 @@ if (isset($_POST['logout'])) {
             </div>
             <div class="box">
                 <img src="" alt="">
-                <span>healty tea</span>
+                <span>Mid-Year Sale</span>
                 <h1>save up to 50% off</h1>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis voluptas reprehenderit quidem consectetur alias natus in beatae quas ipsum facere?</p>
+                <p>Don’t miss the trend! Get exclusive discounts on our most popular sneaker collections.</p>
             </div>
         </div>
     </section>
     <section class="shop">
         <div class="title">
-            <img src="" alt="">
+            <img src="">
             <h1>Trending Products</h1>
         </div>
+
         <div class="row">
-            <img src="" alt="">
+            <video autoplay muted loop>
+                <source src="Assets/video/model1.mp4">
+            </video>
             <div class="row-detail">
-                <img src="" alt="">
+                <img src="Assets/img/model2.png" alt="">
                 <div class="top-footer">
-                    <h1>a cup of green tea makes you healty</h1>
+                    <h1>A pair of good sneakers keeps you moving</h1>
                 </div>
             </div>
         </div>
         <div class="box-container">
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/shop1.jpeg">
                 <a href="view_product.php" class="btn">shop now</a>
             </div>
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/shop3.jpg">
                 <a href="view_product.php" class="btn">shop now</a>
             </div>
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/shop6.jpg">
                 <a href="view_product.php" class="btn">shop now</a>
             </div>
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/shop4.jpg">
                 <a href="view_product.php" class="btn">shop now</a>
             </div>
             <div class="box">
-                <img src="" alt="">
-                <a href="view_product.php" class="btn">shop now</a>
-            </div>
-            <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/shop5.jpg">
                 <a href="view_product.php" class="btn">shop now</a>
             </div>
         </div>
@@ -178,7 +154,10 @@ if (isset($_POST['logout'])) {
     <section class="shop-category">
         <div class="box-container">
             <div class="box">
-                <img src="" alt="">
+                <video autoplay muted loop>
+                    <source src="Assets/video/">
+                </video>
+
                 <div class="detail">
                     <span>BIG OFFERS</span>
                     <h1>Extra 15% off</h1>
@@ -198,31 +177,31 @@ if (isset($_POST['logout'])) {
     <section class="services">
         <div class="box-container">
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/box1.jpg">
                 <div class="detail">
                     <h3>great savings</h3>
-                    <p>save big every order</p>
+                    <p>Enjoy exclusive deals and discounts on every sneaker purchase.</p>
                 </div>
             </div>
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/bo2.jpg">
                 <div class="detail">
                     <h3>24*7 support</h3>
-                    <p>one-on-one support</p>
+                    <p>We're here for you anytime — 24/7 customer support.</p>
                 </div>
             </div>
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/box3.jpg">
                 <div class="detail">
                     <h3>gift voucher</h3>
-                    <p>voucher on every festifals</p>
+                    <p>Gift cards and vouchers available for all special occasions.</p>
                 </div>
             </div>
             <div class="box">
-                <img src="" alt="">
+                <img src="Assets/img/box4.jpg">
                 <div class="detail">
                     <h3>worldwide delivery</h3>
-                    <p>dropsgip woldwide</p>
+                    <p>Fast and secure shipping to customers around the world.</p>
                 </div>
             </div>
         </div>

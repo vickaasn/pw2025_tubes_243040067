@@ -15,7 +15,7 @@ function unique_id()
     // Hitung panjang string karakter
     $charLength = strlen($chars);
 
-    // Inisialisasi string acak
+    // Inisialisasi string acak 
     $randomString = '';
 
     // Loop untuk membuat ID sepanjang 20 karakter

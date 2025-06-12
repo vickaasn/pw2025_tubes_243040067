@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 08, 2025 at 01:46 PM
+-- Generation Time: Jun 12, 2025 at 11:52 AM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -66,10 +66,25 @@ CREATE TABLE `orders` (
 CREATE TABLE `products` (
   `id` int NOT NULL,
   `name` varchar(100) NOT NULL,
-  `price` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `image` varchar(255) NOT NULL,
   `product_detail` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `price`, `image`, `product_detail`) VALUES
+(1, 'Dash Linium Light Pink', 23.80, 'sepatu1.jpg', ''),
+(2, 'Careera Evening', 29.90, 'sepatu2.jpg', ''),
+(3, 'Dash saturn-3', 23.80, 'sepatu3.jpg', ''),
+(4, 'Careera Stardust Pink', 29.90, 'sepatu4.jpg', ''),
+(5, 'Falcon Green Rush', 29.90, 'sepatu5.jpg', ''),
+(6, 'Falcon Purple Rush', 29.90, 'sepatu6.jpg', ''),
+(7, 'Dash 23 The West Kick', 23.80, 'sepatu7.jpg', ''),
+(8, 'Integra Heritage Blue Sepatu Wanita Unisex', 29.90, 'sepatu8.jpg', ''),
+(9, 'Unity_France Blue', 29.90, 'sepatu9.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -147,10 +162,16 @@ ALTER TABLE `cart`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
