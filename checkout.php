@@ -5,117 +5,99 @@ session_start();
 $warning_msg = [];
 $success_msg = [];
 $message = [];
+$cart_items = []; // Array untuk menyimpan detail item dari keranjang
+$grand_total = 0; // Untuk menghitung total harga semua item di keranjang
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 } else {
     $user_id = '';
+    $message[] = 'Harap login untuk melanjutkan checkout!';
+    // header('location: login.php'); // Aktifkan ini jika login wajib
+    // exit();
 }
 
-// Fungsi unique_id() ini TIDAK LAGI DIPERLUKAN karena ID menggunakan AUTO_INCREMENT.
-// Baris ini bisa dihapus sepenuhnya jika tidak ada bagian lain dari project yang menggunakannya.
-// if (!function_exists('unique_id')) {
-//     function unique_id() {
-//         return uniqid('', true);
-//     }
-// }
+// --- Logika untuk mengambil item dari keranjang ---
+if ($user_id != '') { // Hanya jika user sudah login
+    $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+    $select_cart->execute([$user_id]);
 
-if (isset($_POST['logout'])) {
-    session_destroy();
-    header("location: login.php");
-    exit(); // Selalu gunakan exit() setelah header redirect untuk menghentikan eksekusi script
-}
+    if ($select_cart->rowCount() > 0) {
+        while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
+            $select_product = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
+            $select_product->execute([$fetch_cart['product_id']]);
+            if ($select_product->rowCount() > 0) {
+                $fetch_product = $select_product->fetch(PDO::FETCH_ASSOC);
+                $sub_total = $fetch_product['price'] * $fetch_cart['qty'];
+                $grand_total += $sub_total;
 
-// adding products in wishlist
-if (isset($_POST['add_to_wishlist'])) {
-    if ($user_id == '') {
-        $warning_msg[] = 'Silakan login terlebih dahulu untuk menambahkan ke wishlist!';
-    } else {
-        // *** PERBAIKAN: Hapus baris $id = unique_id(); ***
-        $product_id = filter_var($_POST['product_id'] ?? '', FILTER_SANITIZE_STRING);
-
-        // Perbaikan backticks pada nama tabel
-        $varify_wishlist = $conn->prepare("SELECT * FROM `wishlist` WHERE user_id = ? AND product_id = ?");
-        $varify_wishlist->execute([$user_id, $product_id]);
-
-        // Perbaikan backticks pada nama tabel
-        $cart_num = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ? AND product_id = ?");
-        $cart_num->execute([$user_id, $product_id]);
-
-        if ($varify_wishlist->rowCount() > 0) {
-            $warning_msg[] = 'Produk sudah ada di wishlist Anda!';
-        } else if ($cart_num->rowCount() > 0) {
-            $warning_msg[] = 'Produk sudah ada di keranjang Anda!';
-        } else {
-            // Perbaikan backticks pada nama tabel, hanya ambil kolom 'price'
-            $select_price = $conn->prepare("SELECT `price` FROM `products` WHERE id = ? LIMIT 1");
-            $select_price->execute([$product_id]);
-            $fetch_price = $select_price->fetch(PDO::FETCH_ASSOC);
-
-            if ($fetch_price) { // Pastikan produk ditemukan sebelum insert
-                // *** PERBAIKAN: Hapus 'id' dari daftar kolom dan placeholder dari VALUES ***
-                // Karena 'id' di-handle oleh AUTO_INCREMENT
-                $insert_wishlish = $conn->prepare("INSERT INTO `wishlist` (`user_id`, `product_id`, `price`) VALUES(?,?,?)");
-                // *** PERBAIKAN: Hapus $id dari array execute() ***
-                $insert_wishlish->execute([$user_id, $product_id, $fetch_price['price']]);
-                $success_msg[] = 'Produk berhasil ditambahkan ke wishlist!';
-            } else {
-                $warning_msg[] = 'Produk tidak ditemukan!'; // Tambahkan pesan error jika product_id tidak valid
+                $cart_items[] = [
+                    'product_id' => $fetch_cart['product_id'],
+                    'name' => $fetch_product['name'],
+                    'price' => $fetch_product['price'], // Harga per item
+                    'qty' => $fetch_cart['qty'],
+                    'sub_total' => $sub_total
+                ];
             }
+        }
+    } else {
+        $message[] = 'Keranjang Anda kosong!';
+    }
+} else {
+    $message[] = 'Keranjang tidak dapat diakses tanpa login.';
+}
+
+
+// --- Logika untuk proses checkout (jika form checkout disubmit) ---
+if (isset($_POST['place_order'])) {
+    if ($user_id == '') {
+        $message[] = 'Harap login untuk melakukan checkout!';
+    } else if (empty($cart_items)) { // Pastikan ada item di keranjang sebelum checkout
+        $message[] = 'Tidak ada produk di keranjang untuk checkout!';
+    } else {
+        // Ambil data dari form
+        if (isset($_POST['name']) && isset($_POST['number']) && isset($_POST['email']) && isset($_POST['method']) && isset($_POST['address'])) {
+            $name = htmlspecialchars($_POST['name']);
+            $number = htmlspecialchars($_POST['number']);
+            $email = htmlspecialchars($_POST['email']);
+            $method = htmlspecialchars($_POST['method']);
+            $address = htmlspecialchars($_POST['address']);
+            $address_type = 'home'; // Nilai default, tambahkan input di form jika perlu pilihan
+
+            // Masukkan setiap item dari keranjang ke tabel orders
+            foreach ($cart_items as $item) {
+                $insert_order = $conn->prepare("INSERT INTO `orders` (user_id, name, number, email, address, address_type, method, product_id, price, qty, `date`, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                $insert_order->execute([
+                    $user_id,
+                    $name,
+                    $number,
+                    $email,
+                    $address,
+                    $address_type,
+                    $method,
+                    $item['product_id'],
+                    $item['sub_total'], // Menyimpan sub_total untuk setiap item sebagai 'price' di tabel orders
+                    $item['qty'],
+                    date('Y-m-d H:i:s'),
+                    'pending'
+                ]);
+            }
+
+            // Opsional: Hapus item dari keranjang setelah berhasil diorder
+            $empty_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
+            $empty_cart->execute([$user_id]);
+
+            $success_msg[] = 'Pesanan berhasil ditempatkan!';
+            // Anda bisa mengarahkan pengguna ke halaman konfirmasi pesanan setelah ini
+            // header('location: order_confirmed.php');
+            // exit();
+        } else {
+            $message[] = 'Data pengiriman form tidak lengkap. Harap lengkapi semua bidang yang diperlukan.';
         }
     }
 }
 
-// adding products in cart
-if (isset($_POST['add_to_cart'])) {
-    if ($user_id == '') {
-        $warning_msg[] = 'Silakan login terlebih dahulu untuk menambahkan ke keranjang!';
-    } else {
-        // *** PERBAIKAN: Hapus baris $id = unique_id(); ***
-        $product_id = filter_var($_POST['product_id'] ?? '', FILTER_SANITIZE_STRING);
-
-        // *** PERBAIKAN: Gunakan FILTER_VALIDATE_INT dan validasi kuantitas ***
-        $qty = filter_var($_POST['qty'] ?? 1, FILTER_VALIDATE_INT);
-        if ($qty === false || $qty < 1 || $qty > 99) {
-            $warning_msg[] = 'Kuantitas tidak valid! Harus antara 1 dan 99.';
-            $qty = 1; // Set kembali ke nilai default yang aman
-        }
-
-        // Perbaikan backticks pada nama tabel
-        $varify_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ? AND product_id = ?");
-        $varify_cart->execute([$user_id, $product_id]);
-
-        // Perbaikan backticks pada nama tabel
-        $max_cart_items = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
-        $max_cart_items->execute([$user_id]);
-
-        if ($varify_cart->rowCount() > 0) {
-            $warning_msg[] = 'Produk sudah ada di keranjang Anda!';
-        } else if ($max_cart_items->rowCount() >= 20) { // *** PERBAIKAN: Variabel $max_cart menjadi $max_cart_items ***
-            $warning_msg[] = 'Keranjang sudah penuh! Hapus beberapa item atau check out.';
-        } else {
-            // Perbaikan backticks pada nama tabel, hanya ambil kolom 'price'
-            $select_price = $conn->prepare("SELECT `price` FROM `products` WHERE id = ? LIMIT 1");
-            $select_price->execute([$product_id]);
-            $fetch_price = $select_price->fetch(PDO::FETCH_ASSOC);
-
-            if ($fetch_price) { // Pastikan produk ditemukan sebelum insert
-                // *** PERBAIKAN: Hapus 'id' dari daftar kolom dan placeholder dari VALUES ***
-                // Perbaiki juga typo pada `cart'` menjadi `cart`
-                $insert_cart = $conn->prepare("INSERT INTO `cart` (`user_id`, `product_id`, `price`, `qty`) VALUES(?,?,?,?)");
-                // *** PERBAIKAN: Hapus $id dari array execute() ***
-                $insert_cart->execute([$user_id, $product_id, $fetch_price['price'], $qty]);
-                $success_msg[] = 'Produk berhasil ditambahkan ke keranjang!';
-            } else {
-                $warning_msg[] = 'Produk tidak ditemukan!'; // Tambahkan pesan error jika product_id tidak valid
-            }
-        }
-    }
-}
 ?>
-<style type="text/css">
-    <?php include 'style.css'; ?>
-</style>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -126,57 +108,89 @@ if (isset($_POST['add_to_cart'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Yeseva+One&display=swap" rel="stylesheet">
-    <title>Green Coffe - product detail page</title>
+    <title>Checkout Page</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <?php include 'components/header.php'; ?>
+
     <div class="main">
         <div class="banner">
-            <h1>product detail</h1>
+            <h1>Checkout</h1>
         </div>
         <div class="title2">
-            <a href="home.php">home </a><span>product detail</span>
+            <a href="home.php">home </a><span>checkout</span>
         </div>
-        <section class="view_page">
+
+        <section class="checkout">
             <?php
-            if (isset($_GET['pid'])) {
-                $pid = $_GET['pid'];
-                // *** PERBAIKAN: Gunakan prepared statement dengan placeholder untuk keamanan dan penanganan tipe data ***
-                // Ini mengatasi error "Incorrect integer value" jika $pid bukan integer.
-                $select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
-                $select_products->execute([$pid]);
-                if ($select_products->rowCount() > 0) {
-                    while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
-            ?>
-                        <form method="post">
-                            <img src="image/<?php echo htmlspecialchars($fetch_products['image']); ?>" alt="Product Image">
-                            <div class="detail">
-                                <div class="price">$<?php echo htmlspecialchars($fetch_products['price']); ?>/-</div>
-                                <div class="name"><?php echo htmlspecialchars($fetch_products['name']); ?></div>
-                                <div class="detail">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, est? Commodi molestiae tenetur iure iste laudantium accusantium veniam distinctio, quam sunt. Repellat harum cumque doloremque. Molestias neque voluptates aut sunt.</p>
-                                </div>
-                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($fetch_products['id']); ?>">
-                                <div class="button">
-                                    <button type="submit" name="add_to_wishlist" class="btn">add to wishlist<i class="bx bx-heart"></i></button>
-                                    <input type="hidden" name="qty" value="1" min="1" max="99" class="quantity">
-                                    <button type="submit" name="add_to_cart" class="btn">add to cart<i class="bx bx-cart"></i></button>
-                                </div>
-                            </div>
-                        </form>
-            <?php
-                    } // end while
-                } else {
-                    echo '<p class="empty">No product found!</p>'; // Pesan jika produk tidak ditemukan
+            // Menampilkan pesan warning/success/error
+            if (!empty($message)) {
+                foreach ($message as $msg) {
+                    echo '<p class="error-msg">' . htmlspecialchars($msg) . '</p>';
                 }
+            }
+            if (!empty($warning_msg)) {
+                foreach ($warning_msg as $msg) {
+                    echo '<p class="warning-msg">' . htmlspecialchars($msg) . '</p>';
+                }
+            }
+            if (!empty($success_msg)) {
+                foreach ($success_msg as $msg) {
+                    echo '<p class="success-msg">' . htmlspecialchars($msg) . '</p>';
+                }
+            }
+
+            // Tampilkan ringkasan pesanan dari keranjang
+            if (!empty($cart_items)) {
+                echo '<div class="product-details">';
+                echo '<h2>Ringkasan Pesanan Anda:</h2>';
+                foreach ($cart_items as $item) {
+                    echo '<p>' . htmlspecialchars($item['name']) . ' (x' . htmlspecialchars($item['qty']) . ') - $' . htmlspecialchars($item['sub_total']) . '</p>';
+                }
+                echo '<p><strong>Total Keseluruhan: $' . htmlspecialchars($grand_total) . '/-</strong></p>';
+
+                // Form checkout yang lebih lengkap
+                echo '<form action="" method="post" class="checkout-form">';
+                // Tidak perlu hidden input product_id_post lagi karena kita proses dari cart_items
+
+                echo '<div class="flex">';
+                echo '<div class="box">';
+                echo '<p>Nama Lengkap <span>*</span></p>';
+                echo '<input type="text" name="name" required class="input">';
+                echo '<p>Nomor Telepon <span>*</span></p>';
+                echo '<input type="number" name="number" required class="input">';
+                echo '<p>Email <span>*</span></p>';
+                echo '<input type="email" name="email" required class="input">';
+                echo '</div>';
+
+                echo '<div class="box">';
+                echo '<p>Metode Pembayaran <span>*</span></p>';
+                echo '<select name="method" class="input">';
+                echo '<option value="cash on delivery">Cash On Delivery</option>';
+                echo '<option value="credit card">Credit Card</option>';
+                echo '<option value="paypal">Paypal</option>';
+                echo '<option value="bank transfer">Bank Transfer</option>';
+                echo '</select>';
+                echo '<p>Alamat Lengkap <span>*</span></p>';
+                echo '<input type="text" name="address" required class="input">';
+                // Kuantitas tidak perlu di form ini karena sudah dari keranjang
+                echo '</div>';
+                echo '</div>';
+
+                echo '<button type="submit" name="place_order" class="btn">Place Order</button>';
+                echo '</form>';
+                echo '</div>';
             } else {
-                echo '<p class="empty">Product ID not provided!</p>'; // Pesan jika pid tidak ada di URL
+                echo '<p class="empty">Tidak ada produk di keranjang Anda untuk checkout.</p>';
             }
             ?>
         </section>
+
         <?php include 'components/footer.php'; ?>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script src="script.js"></script>
     <?php include 'components/alert.php'; ?>

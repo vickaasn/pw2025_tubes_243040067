@@ -176,7 +176,6 @@ button {
 }
 
 /* ------------header-------------- */
-
 .header {
   background-color: var(--white); /* Latar belakang putih */
   border-bottom: var(--border); /* Garis bawah tipis */
@@ -368,8 +367,7 @@ button {
 .logout-btn {
   background: var(--black); /* Warna hitam atau sesuai tema */
   color: var(--white);
-  text-transform: uppercase;
-  /* width: 11rem; (dihapus, karena .btn sudah width: 100%) */
+  text-transform: uppercase; /* width: 11rem; (dihapus, karena .btn sudah width: 100%) */
   border-radius: 0.5rem;
   margin-top: 1rem; /* Jarak dari elemen sebelumnya */
   padding: 1rem 1.5rem;
@@ -487,8 +485,7 @@ button {
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  /* position: relative; */
+  scroll-snap-type: x mandatory; /* position: relative; */
 }
 
 .slider__slider {
@@ -518,10 +515,7 @@ button {
   /* REMOVED absolute positioning here to allow flexbox to center it */
   position: absolute; /* tadinya relative */
   text-align: center;
-  top: 30%; /*gaada
-  left: 20%; /*gaada
-  /* z-index: 2;
-  max-width: 80%; /* Adjusted from '8' to '80%' for a valid width */
+  top: 30%; /*gaada left: 20%; /*gaada /* z-index: 2; max-width: 80%; /* Adjusted from '8' to '80%' for a valid width */
   /* padding: 2rem; */
 }
 
@@ -553,8 +547,7 @@ button {
   height: 10px;
   border-radius: 50%;
   bottom: -50%; /*tadinya -3.5rem*/
-  left: 50%;
-  /* transform: translateX(-50%); */
+  left: 50%; /* transform: translateX(-50%); */
   background: #fff;
 }
 
@@ -563,9 +556,7 @@ button {
   color: #fff;
   margin-top: 2rem;
   margin-bottom: 2rem; /*3*/
-  /* max-width: 600px;
-  margin-left: auto;
-  margin-right: auto; */
+  /* max-width: 600px; margin-left: auto; margin-right: auto; */
 }
 
 .slidel {
@@ -630,7 +621,6 @@ button {
 }
 
 /* thumb section */
-
 .thumb {
   max-width: 1200px;
   box-shadow: var(--box-shadow);
@@ -769,6 +759,10 @@ button {
 
 .shop-category .detail span {
   font-size: 1.3rem;
+}
+
+.shop-category .detail .btn {
+  opacity: 0.6;
 }
 
 .services {
@@ -1194,120 +1188,47 @@ footer .bottom-footer {
 
 /* ---------view product section--------- */
 .products .box-container {
+  display: grid; /* DITAMBAH */
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  justify-content: center;
+  gap: 2rem; /* beri jarak antar box */
+  padding: 2rem;
+  justify-items: center;
 }
 
 .products .box-container .box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   box-shadow: var(--box-shadow);
   border-radius: 0.5rem;
   padding: 2rem 1rem;
   margin: 1rem;
   position: relative;
+  max-width: 22rem; /* batasi ukuran box agar seragam */
+  background: #fff;
 }
 
-.products .box-container .box .img {
-  width: 80%;
+.products .box-container .box img {
+  width: 100%;
   height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
 }
 
-.products .box-container .box .name {
-  font-size: 1.2rem;
-  color: #555;
-  text-transform: capitalize;
-}
-
+/* perbaiki tombol di bawah gambar */
 .products .box-container .box .button {
-  text-align: center;
-  position: absolute;
-  bottom: 30%;
-  right: 7%;
-  border-radius: 20px;
-  background: var(--ligh-green);
-  padding: 0.5rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  position: static; /* jangan pakai absolute kalau tidak perlu */
 }
 
 .products .box-container .box .button i,
 .products .box-container .box .button a {
   font-size: 1.3rem;
   font-weight: bold;
-  margin-right: 0.5rem;
   color: #000;
-}
-
-.products .box-container.box .flex {
-  padding-bottom: 1rem;
-  display: flex;
-  margin-right: auto;
-}
-
-.products .box-container .box .price {
-  font-size: 1.1rem;
-  color: var(--green);
-  margin-right: auto;
-}
-
-.products .box-container .box .btn {
-  position: absolute;
-  top: 5%;
-}
-
-.products .box-container .box .flex .qty {
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  width: 4.5rem;
-  font-size: 1.1rem;
-  color: #000;
-}
-
-.products .box-container .box .flex .fa-edit {
-  border-radius: 0.5rem;
-  font-size: 1.7rem;
-  color: #fff;
-  height: 2.7rem;
-  width: 4.5rem;
-  cursor: pointer;
-  background: var(--ligh-green);
-  margin-left: 0.5rem;
-}
-
-.products .box-container .box .flex .fa-edit:hover {
-  background: var(--ligh-green);
-  color: #000;
-}
-
-.products .box-container .box .sub-total {
-  padding-bottom: 1rem;
-  font-size: 1.7rem;
-  color: gray;
-}
-
-.products .box-container .box .sub-total span {
-  color: red;
-}
-
-.products .box-container .box .button {
-  align-items: center;
-}
-
-.products .cart-total {
-  box-shadow: var(--box-shadow);
-  border-radius: 0.5rem;
-  max-width: 50vw;
-  margin: 1rem auto;
-  text-align: center;
-  padding: 2rem;
-}
-
-.products .cart-total p {
-  padding-bottom: 1rem;
-  font-size: 2rem;
-  color: #555;
-  text-transform: capitalize;
-}
-
-.products .cart-total p span {
-  color: var(--green);
 }
 
 /* ---------view products--------- */
@@ -1328,8 +1249,13 @@ footer .bottom-footer {
 }
 
 .view_page form img {
+  width: 100%; /* agar gambar menyesuaikan container */
+  max-width: 400px; /* atur ukuran maksimal */
+  height: auto; /* jaga proporsi */
   padding: 0.5rem;
   box-shadow: var(--box-shadow);
+  display: block;
+  margin: 0 auto; /* tengah */
 }
 
 .view_page form .name {
@@ -1488,69 +1414,117 @@ footer .bottom-footer {
 /* ---------view product--------- */
 .orders .box-container {
   padding: 2% 6%;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  /* Menggunakan display: grid untuk layout yang responsif */
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(18rem, 1fr)
+  ); /* Mengurangi minmax agar lebih kecil dan adaptif */
+  gap: 1.5rem; /* Jarak antar kotak */
   align-items: flex-start;
   justify-content: center;
-  gap: 1.5rem;
 }
 
 .orders .box-container .box {
   box-shadow: var(--box-shadow);
   border-radius: 0.5rem;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden; /* Menggunakan overflow: hidden saja */
+  display: flex; /* Menggunakan flexbox untuk tata letak konten di dalam box */
+  flex-direction: column; /* Konten disusun vertikal */
+  align-items: center; /* Pusatkan item secara horizontal */
+  padding: 1rem; /* Tambahkan padding agar konten tidak terlalu mepet tepi */
+  text-align: center; /* Pusatkan teks */
+  height: auto; /* Biarkan tinggi menyesuaikan konten */
 }
 
 .orders .box-container .box a {
-  display: flex;
+  display: flex; /* Tetap flex untuk link */
   align-items: center;
+  flex-direction: column; /* Sesuaikan arah flex di dalam link jika perlu */
+  width: 100%; /* Pastikan link mengisi lebar box */
+  text-decoration: none; /* Hapus underline default pada link */
 }
 
 .orders .box-container .box a .row {
-  position: absolute;
-  right: 1%;
+  /* Jika row ini dimaksudkan untuk ikon/detail kecil, posisinya mungkin perlu disesuaikan */
+  /* Berdasarkan screenshot, sepertinya tidak ada elemen .row di dalam <a> */
+  /* Jika ada, pastikan posisinya relatif terhadap .box atau atur ulang */
+  position: absolute; /* Jika memang harus absolute */
+  right: 1rem; /* Sesuaikan posisi relatif terhadap box */
+  top: 1rem; /* Sesuaikan posisi relatif terhadap box */
+  z-index: 10; /* Pastikan di atas gambar jika menumpuk */
 }
 
 .orders .box-container .box .date {
   position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0.5rem 1.5rem;
+  top: 1rem; /* Sesuaikan posisi dari atas */
+  left: 1rem; /* Sesuaikan posisi dari kiri */
+  padding: 0.4rem 1.2rem; /* Sedikit lebih kecil dari sebelumnya */
   background: var(--ligh-green);
-  font-size: 0.6rem;
+  font-size: 0.7rem; /* Ukuran font sedikit lebih besar dari 0.6rem */
   display: inline-block;
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */ /* Hapus ini karena posisinya absolute */
   border-radius: 0.5rem;
+  z-index: 10; /* Pastikan di atas gambar */
 }
 
-.orders .box-container .box .image {
-  height: 20rem;
+.orders .box-container .box .product-image {
   width: 100%;
-  object-fit: contain;
-  margin-left: -4rem;
+  max-width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .orders .box-container .box .name {
-  font-size: 1rem;
+  font-size: 0.9rem; /* Sedikit lebih kecil agar lebih ringkas */
   text-transform: capitalize;
+  overflow: hidden;
   text-overflow: ellipsis;
-  overflow-x: hidden;
+  white-space: nowrap; /* Mencegah teks turun baris jika terlalu panjang */
   color: #000;
+  width: 100%; /* Pastikan nama mengisi lebar yang tersedia */
+  margin-top: 0.5rem; /* Jarak dari gambar */
+  padding: 0 0.5rem; /* Tambahkan padding horizontal agar tidak terlalu mepet tepi */
+  box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
 }
 
 .orders .box-container .box .price {
-  color: orange;
   font-size: 1rem;
+  color: #ff6600;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
 }
 
 .orders .box-container .box .status {
-  margin-left: 0.5rem;
-  font-size: 1rem;
-  text-transform: capitalize;
+  font-size: 0.85rem;
+  background-color: #fff3e0;
+  color: #ff9800;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+/* Anda bisa menambahkan kelas status spesifik jika mau, contoh: */
+.orders .box-container .box .status.pending {
+  color: orange;
+  background-color: #fff3e0;
+}
+.orders .box-container .box .status.completed {
+  color: green;
+  background-color: #e8f5e9;
 }
 
 .orders .box-container .box:hover {
-  box-shadow: var(--box-shadow);
+  box-shadow: var(
+    --box-shadow-hover,
+    0 5px 15px rgba(0, 0, 0, 0.1)
+  ); /* Default hover shadow jika var tidak ada */
+  transform: translateY(-3px); /* Efek sedikit naik saat hover */
+  transition: all 0.3s ease-in-out; /* Transisi halus */
 }
 
 /* ---------view order section--------- */
@@ -1691,4 +1665,4 @@ footer .bottom-footer {
   form {
     width: 100%;
   }
-}
+} /* <--- BARIS INI (TERUTAMA) ATAU KEDUANYA */

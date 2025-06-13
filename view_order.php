@@ -47,7 +47,7 @@ if (isset($_POST['cancle'])) {
     <?php include 'components/header.php'; ?>
     <div class="main">
         <div class="banner">
-            <h1>order detail</h1>
+            <h1></h1>
         </div>
         <div class="title2">
             <a href="home.php">home </a><span>order detail</span>
@@ -77,7 +77,7 @@ if (isset($_POST['cancle'])) {
                                 <div class="box">
                                     <div class="col">
                                         <p class="title"><i class="bi bi-calendar-fill"></i><?= $fetch_order['date']; ?></p>
-                                        <img src="image/<?= $fetch_product['image']; ?>" class="image">
+                                        <img src="Assets/img/<?= htmlspecialchars($fetch_products['image']); ?>" alt="Gambar <?= htmlspecialchars($fetch_products['name']); ?>" class="product-image">
                                         <p class="price"><?= $fetch_product['price']; ?> x <?= $fetch_order['qty']; ?></p>
                                         <h3 class="name"><?= $fetch_product['name']; ?></h3>
                                         <p class="grand-total">Total amount payable : <span>$<?= $grand_total; ?></span></p>

@@ -118,7 +118,7 @@ if (isset($_POST['empty_cart'])) {
                 ?>
                             <form method="post" action="" class="box">
                                 <input type="hidden" name="cart_id" value="<?= htmlspecialchars($fetch_cart['id']); ?>">
-                                <img src="image/<?= htmlspecialchars($fetch_products['image']); ?>" class="img" alt="Product Image">
+                                <img src="Assets/img/<?= htmlspecialchars($fetch_products['image']); ?>" alt="Gambar <?= htmlspecialchars($fetch_products['name']); ?>" class="product-image">
                                 <h3 class="name"><?= htmlspecialchars($fetch_products['name']); ?></h3>
                                 <div class="flex">
                                     <p class="price">price $<?= htmlspecialchars($fetch_products['price']); ?>/-</p>
@@ -126,7 +126,6 @@ if (isset($_POST['empty_cart'])) {
                                     <button type="submit" name="update_cart" class="bx bxs-edit fa-edit"></button>
                                 </div>
                                 <p class="sub-total">sub total: <span>$<?= $sub_total = ($fetch_cart['qty'] * $fetch_cart['price']) ?></span></p>
-
                                 <button type="submit" name="delete_item" class="btn" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">delete</button>
                             </form>
                 <?php
@@ -149,7 +148,10 @@ if (isset($_POST['empty_cart'])) {
                         <form method="post">
                             <button type="submit" name="empty_cart" class="btn" onclick="return confirm('Apakah Anda yakin ingin mengosongkan keranjang Anda?')">empty cart</button>
                         </form>
-                        <a href="checkout.php" class="btn">lanjut ke checkout</a>
+                        <form method="post" action="checkout.php">
+                            <button type="submit" name="place_order" class="btn">lanjut ke checkout</button>
+                        </form>
+
                     </div>
                 </div>
             <?php } ?>

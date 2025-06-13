@@ -22,7 +22,7 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Coffe - home page</title>
+    <title>SNEAKYPAIR - home page</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -152,27 +152,7 @@ if (isset($_POST['logout'])) {
         </div>
     </section>
     <section class="shop-category">
-        <div class="box-container">
-            <div class="box">
-                <video autoplay muted loop>
-                    <source src="Assets/video/">
-                </video>
 
-                <div class="detail">
-                    <span>BIG OFFERS</span>
-                    <h1>Extra 15% off</h1>
-                    <a href="view_product.php" class="btn">shop now</a>
-                </div>
-            </div>
-            <div class="box">
-                <img src="" alt="">
-                <div class="detail">
-                    <span>now in taster</span>
-                    <h1>coffe house</h1>
-                    <a href="view_product.php" class="btn">shop now</a>
-                </div>
-            </div>
-        </div>
     </section>
     <section class="services">
         <div class="box-container">
@@ -206,25 +186,7 @@ if (isset($_POST['logout'])) {
             </div>
         </div>
     </section>
-    <section class="brand">
-        <div class="box-container">
-            <div class="box">
-                <img src="" alt="">
-            </div>
-            <div class="box">
-                <img src="" alt="">
-            </div>
-            <div class="box">
-                <img src="" alt="">
-            </div>
-            <div class="box">
-                <img src="" alt="">
-            </div>
-            <div class="box">
-                <img src="" alt="">
-            </div>
-        </div>
-    </section>
+
     <?php include 'components/footer.php'; ?>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.mon.js"></script>

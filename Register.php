@@ -21,7 +21,7 @@ if (isset($_SESSION['user_id'])) {
 
 if (isset($_POST['submit-btn'])) {
 
-    $id = unique_id();
+    // $id = unique_id(); hapus
 
     $name = $_POST['name'] ?? '';
     $name = trim($name);
@@ -59,10 +59,13 @@ if (isset($_POST['submit-btn'])) {
         if ($select_user->rowCount() > 0) {
             $message[] = 'Email sudah terdaftar!';
         } else {
-            $insert_user = $conn->prepare("INSERT INTO `users` (id, name, email, password) VALUES (?, ?, ?, ?)");
-            $insert_user->execute([$id, $name, $email, $hashed_password]);
+            $insert_user = $conn->prepare("INSERT INTO `users` (name, email, password, user_type) VALUES (?, ?, ?, 'user')");
+            $insert_user->execute([$name, $email, $hashed_password]);
 
-            $_SESSION['user_id'] = $id;
+            // Ambil ID yang baru dibuat oleh database untuk dimasukkan ke session
+            $new_user_id = $conn->lastInsertId();
+
+            $_SESSION['user_id'] = $new_user_id;
             $_SESSION['user_name'] = $name;
             $_SESSION['user_email'] = $email;
 
@@ -100,11 +103,11 @@ if (isset($_POST['submit-btn'])) {
             <form action="" method="post">
                 <div class="input-field">
                     <p>your name <sup>*</sup></p>
-                    <input type="text" name="name" require placeholder="enter your name" maxlength="50">
+                    <input type="text" name="name" required placeholder="enter your name" maxlength="50">
                 </div>
                 <div class="input-field">
                     <p>your email <sup>*</sup></p>
-                    <input type="text" name="email" require placeholder="enter your email" maxlength="50"
+                    <input type="email" name="email" required placeholder="enter your email" maxlength="50"
                         oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
                 <div class="input-field">

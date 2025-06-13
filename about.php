@@ -25,14 +25,14 @@ if (isset($_POST['logout'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Yeseva+One&display=swap" rel="stylesheet">
-    <title>Green Coffe - about us page</title>
+    <title>SNEAKYPAIR - about us page</title>
 </head>
 
 <body>
     <?php include 'components/header.php'; ?>
     <div class="main">
         <div class="banner">
-            <h1>about us</h1>
+            <h1></h1>
         </div>
         <div class="title2">
             <a href="home.php">home </a><span>about</span>
@@ -41,32 +41,32 @@ if (isset($_POST['logout'])) {
             <div class="box">
                 <img src="Assets/img/about1.jpg">
                 <div class="detail">
-                    <span>coffee</span>
-                    <h1>lemon green</h1>
+                    <span>SNEAKYPAIR</span>
+                    <h1>Dash Linium</h1>
                     <a href="view_prosucts.php" class="btn">shop now</a>
                 </div>
             </div>
             <div class="box">
                 <img src="Assets/img/about2.jpg">
                 <div class="detail">
-                    <span>coffee</span>
-                    <h1>lemon tea</h1>
+                    <span>SNEAKYPAIR</span>
+                    <h1>Careera Eveniing</h1>
                     <a href="view_prosucts.php" class="btn">shop now</a>
                 </div>
             </div>
             <div class="box">
                 <img src="Assets/img/about3.jpg">
                 <div class="detail">
-                    <span>coffee</span>
-                    <h1>lemon tea</h1>
+                    <span>SNEAKYPAIR</span>
+                    <h1>Dash Saturn</h1>
                     <a href="view_prosucts.php" class="btn">shop now</a>
                 </div>
             </div>
             <div class="box">
                 <img src="Assets/img/about4.jpg">
                 <div class="detail">
-                    <span>coffee</span>
-                    <h1>lemon green</h1>
+                    <span>SNEAKYPAIR</span>
+                    <h1>Falcon Green</h1>
                     <a href="view_prosucts.php" class="btn">shop now</a>
                 </div>
             </div>
@@ -116,8 +116,8 @@ if (isset($_POST['logout'])) {
                     </video>
                 </div>
                 <div class="detail">
-                    <h1>visit oyr beautiful showroon</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo molestias qui ullam dignissimos, tempora at quasi esse ad labore eius architecto adipisci minima ut soluta illum, magni impedit vero vel!</p>
+                    <h1>SNEAKYPAIR NEW PRODUCT</h1>
+                    <p>"New shoes are comfortable, stylish, and high-quality. Making every step light and fashionable. Find your dream shoes for every adventure."</p>
                     <a href="view_products.php" class="btn">shop now</a>
                 </div>
             </div>
@@ -134,22 +134,8 @@ if (isset($_POST['logout'])) {
                     <h1>sara samith</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi quisquam maiores, exercitationem, possimus est dolores molestias quam a veritatis, asperiores labore iste corporis excepturi eos quod doloribus. Dolor, magni consequatur!</p>
                 </div>
-                <div class="testimonial-item active">
-                    <img src="Assets/img/testimoni2.jpg" alt="">
-                    <h1>sara samith</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi quisquam maiores, exercitationem, possimus est dolores molestias quam a veritatis, asperiores labore iste corporis excepturi eos quod doloribus. Dolor, magni consequatur!</p>
-                </div>
-                <div class="testimonial-item">
-                    <img src="Assets/img/" alt="">
-                    <h1>sara samith</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi quisquam maiores, exercitationem, possimus est dolores molestias quam a veritatis, asperiores labore iste corporis excepturi eos quod doloribus. Dolor, magni consequatur!</p>
-                </div>
-                <div class="testimonial-item">
-                    <img src="Assets/img/" alt="">
-                    <h1>sara samith</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi quisquam maiores, exercitationem, possimus est dolores molestias quam a veritatis, asperiores labore iste corporis excepturi eos quod doloribus. Dolor, magni consequatur!</p>
-                </div>
-                
+
+
                 <div class="left-arrow" onclick="nextSlide()"><i class="bx bxs-left-arrow-alt"></i></div>
                 <div class="right-arrow" onclick="prevSlide()"><i class="bx bxs-right-arrow-alt"></i></div>
             </div>

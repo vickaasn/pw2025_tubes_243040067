@@ -140,16 +140,16 @@ if (isset($_POST['empty_wishlist'])) {
                 ?>
                             <form method="post" action="" class="box">
                                 <input type="hidden" name="wishlist_id" value="<?= htmlspecialchars($fetch_wishlist['id']); ?>">
-                                <img src="image/<?= htmlspecialchars($fetch_products['image']); ?>" alt="Product Image">
+                                <img src="Assets/img/<?= htmlspecialchars($fetch_products['image']); ?>" alt="Gambar <?= htmlspecialchars($fetch_products['name']); ?>" class="product-image">
                                 <h3 class="name"><?= htmlspecialchars($fetch_products['name']); ?></h3>
                                 <div class="flex">
                                     <p class="price">price $<?= htmlspecialchars($fetch_products['price']); ?>/-</p>
                                 </div>
                                 <input type="hidden" name="product_id" value="<?= htmlspecialchars($fetch_products['id']); ?>">
                                 <div class="button">
-                                    <button type="submit" name="add_to_cart" class="btn">add to cart<i class="bx bx-cart"></i></button>
-                                    <a href="view_page.php?pid=<?php echo htmlspecialchars($fetch_products['id']); ?>" class="btn">view product<i class="bx bxs-show"></i></a>
-                                    <button type="submit" name="delete_item" class="btn" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini dari wishlist?')">delete<i class="bx bx-x"></i></button>
+                                    <button type="submit" name="add_to_cart" class=""><i class="bx bx-cart"></i></button>
+                                    <a href="view_page.php?pid=<?php echo htmlspecialchars($fetch_products['id']); ?>" class=><i class="bx bxs-show"></i></a>
+                                    <button type="submit" name="delete_item" class="" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini dari wishlist?')"><i class="bx bx-x"></i></button>
                                 </div>
                             </form>
                 <?php

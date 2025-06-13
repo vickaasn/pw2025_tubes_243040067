@@ -71,7 +71,8 @@ if (isset($_POST['add_to_cart'])) {
         $warning_msg[] = 'Silakan login terlebih dahulu untuk menambahkan ke keranjang!';
     } else {
         // HAPUS BARIS INI: $id = unique_id(); karena ID akan di-generate oleh AUTO_INCREMENT
-        $product_id = filter_var($_POST['product_id'] ?? '', FILTER_SANITIZE_STRING);
+        $product_id = htmlspecialchars(trim($_POST['product_id'] ?? ''), ENT_QUOTES, 'UTF-8');
+
 
         // Perbaikan FILTER_SANITIZE_STRING ke FILTER_VALIDATE_INT dan validasi kuantitas
         $qty = filter_var($_POST['qty'] ?? 1, FILTER_VALIDATE_INT);
@@ -148,7 +149,7 @@ if (isset($_POST['add_to_cart'])) {
                     while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
             ?>
                         <form method="post">
-                            <img src="image/<?php echo htmlspecialchars($fetch_products['image']); ?>" alt="Product Image">
+                            <img src="Assets/img/<?= htmlspecialchars($fetch_products['image']); ?>" alt="Gambar <?= htmlspecialchars($fetch_products['name']); ?>" class="product-image">
                             <div class="detail">
                                 <div class="price">$<?php echo htmlspecialchars($fetch_products['price']); ?>/-</div>
                                 <div class="name"><?php echo htmlspecialchars($fetch_products['name']); ?></div>

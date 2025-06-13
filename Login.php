@@ -83,18 +83,19 @@ if (isset($_POST['submit-btn'])) {
             <form action="" method="post">
                 <div class="input-field">
                     <p>your email <sup>*</sup></p>
-                    <input type="text" name="email" require placeholder="enter your email" maxlength="50"
-                        oninput="this.value = rhis.value.replace(/\s/g, '')">
+                    <input type="email" name="email" required placeholder="enter your email" maxlength="50"
+                        oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
                 <div class="input-field">
-                    <p>comfirm password <sup>*</sup></p>
-                    <input type="password" name="name" require placeholder="enter your passsword" maxlength="50"
-                        oninput="this.value = rhis.value.replace(/\s/g, '')">
+                    <p>your password <sup>*</sup></p>
+                    <input type="password" name="pass" required placeholder="enter your password" maxlength="50"
+                        oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
 
-                <input type="submit" name="submit" value="register now" class="btn">
+                <input type="submit" name="submit-btn" value="login now" class="btn">
                 <p>do not have an account? <a href="register.php">register now</a></p>
             </form>
+
         </section>
     </div>
 </body>
